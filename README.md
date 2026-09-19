@@ -1,6 +1,6 @@
 # 🌿 BioCampus - Landing Page de Descarga APK
 
-Página oficial de descarga para la aplicación móvil **BioCampus** (Universidad Rafael Belloso Chacín).
+Página de descarga para la aplicación móvil **BioCampus** (Universidad Rafael Belloso Chacín).
 
 ## 🚀 Publicación en GitHub Pages
 
