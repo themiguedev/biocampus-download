@@ -1,0 +1,27 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bc-fav-bg" x1="0.1" y1="0.95" x2="0.9" y2="0.05">
+      <stop offset="0%" stop-color="#081a11" />
+      <stop offset="60%" stop-color="#163f28" />
+      <stop offset="100%" stop-color="#2d7a4f" />
+    </linearGradient>
+    <linearGradient id="bc-fav-lL" x1="1" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#40a070" />
+      <stop offset="100%" stop-color="#c8eedd" />
+    </linearGradient>
+    <linearGradient id="bc-fav-lR" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0%" stop-color="#48b07a" />
+      <stop offset="100%" stop-color="#ddf5e8" />
+    </linearGradient>
+    <linearGradient id="bc-fav-stem" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#7fc9a0" />
+      <stop offset="100%" stop-color="#ffffff" />
+    </linearGradient>
+  </defs>
+  <rect width="200" height="200" rx="43" fill="url(#bc-fav-bg)" />
+  <path d="M100 48 L143 73 L143 123 L100 148 L57 123 L57 73 Z" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.22)" stroke-width="1.4" />
+  <path d="M99 106 C88 102, 63 90, 65 75 C67 65, 91 84, 99 106Z" fill="url(#bc-fav-lL)" opacity="0.94" />
+  <path d="M101 88 C112 83, 137 72, 131 58 C127 49, 105 70, 101 88Z" fill="url(#bc-fav-lR)" opacity="0.97" />
+  <path d="M100 131 C100 122, 99.5 114, 100 105 C100.5 95, 100 87, 100 57" stroke="url(#bc-fav-stem)" stroke-width="3.5" stroke-linecap="round" fill="none" />
+  <path d="M136 54 L137.5 58.5 L142 58.5 L138.5 61 L139.7 65.5 L136 63 L132.3 65.5 L133.5 61 L130 58.5 L134.5 58.5 Z" fill="rgba(255,215,80,0.92)" />
+</svg>
