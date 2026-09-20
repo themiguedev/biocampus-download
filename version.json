@@ -1,8 +1,8 @@
 {
   "version": "1.0.1",
-  "versionCode": 2609192008,
-  "timestamp": "19/09/2026 20:08:00",
+  "versionCode": 2609192022,
+  "timestamp": "19/09/2026 20:22:00",
   "downloadUrl": "https://themiguedev.github.io/biocampus-download/BioCampus-Latest.apk",
-  "notes": "Nueva versión de BioCampus con corrección y realce de mascotas en el podio de clasificación.",
+  "notes": "Historial de experiencia acumulada vitalicia en el ranking: las compras en la tienda descuentan EcoPuntos sin afectar el ranking ni el nivel.",
   "forceUpdate": false
 }
