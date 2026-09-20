@@ -1,1 +1,8 @@
-{" version\: \1.0.1\, \versionCode\: 2609192008, \timestamp\: \19/09/2026 20:08:00\, \downloadUrl\: \https://themiguedev.github.io/biocampus-download/BioCampus-Latest.apk\, \notes\: \Nueva versión de BioCampus con corrección y realce de mascotas en el podio de clasificación.\, \forceUpdate\: false}
+{
+  "version": "1.0.1",
+  "versionCode": 2609192008,
+  "timestamp": "19/09/2026 20:08:00",
+  "downloadUrl": "https://themiguedev.github.io/biocampus-download/BioCampus-Latest.apk",
+  "notes": "Nueva versiÃ³n de BioCampus con correcciÃ³n y realce de mascotas en el podio de clasificaciÃ³n.",
+  "forceUpdate": false
+}
