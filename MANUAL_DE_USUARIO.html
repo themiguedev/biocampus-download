@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manual de Usuario — BioCampus</title>
+  <!-- Fuentes modernas -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary: #2d7a4f;
+      --primary-light: #52b788;
+      --primary-dark: #1b4d31;
+      --primary-subtle: #e8f5e9;
+      --accent: #ffd700;
+      --accent-warm: #f59e0b;
+      --blue: #2563eb;
+      --blue-subtle: #eff6ff;
+      --bg-page: #f8fafc;
+      --surface: #ffffff;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.08);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.65;
+      font-size: 15px;
+      scroll-behavior: smooth;
+    }
+
+    /* BARRA SUPERIOR FIJA */
+    .top-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .top-bar-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 1.15rem;
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .top-bar-brand span.logo-badge {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: white;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      font-size: 1.1rem;
+    }
+
+    .top-bar-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 0.88rem;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background: white;
+      color: var(--text-main);
+      border-color: var(--border);
+    }
+    .btn-outline:hover {
+      background: var(--bg-page);
+    }
+
+    /* CONTENEDOR PRINCIPAL */
+    .app-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 30px 20px 80px;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 36px;
+    }
+
+    /* SIDEBAR / ÍNDICE DE CONTENIDOS */
+    .sidebar {
+      position: sticky;
+      top: 80px;
+      height: calc(100vh - 100px);
+      overflow-y: auto;
+      padding-right: 12px;
+    }
+
+    .sidebar-card {
+      background: var(--surface);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      padding: 20px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .sidebar-title {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .sidebar-menu {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .sidebar-menu a {
+      display: block;
+      padding: 7px 12px;
+      border-radius: var(--radius-sm);
+      color: var(--text-main);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.15s ease;
+    }
+
+    .sidebar-menu a:hover {
+      background: var(--primary-subtle);
+      color: var(--primary);
+      transform: translateX(3px);
+    }
+
+    .sidebar-menu a.sub {
+      padding-left: 24px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* CONTENIDO PRINCIPAL */
+    .content {
+      min-width: 0;
+    }
+
+    /* HERO PORTADA */
+    .hero-banner {
+      background: linear-gradient(135deg, #1b4d31 0%, #2d7a4f 60%, #40916c 100%);
+      color: white;
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      margin-bottom: 36px;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-banner::after {
+      content: "🌿";
+      position: absolute;
+      right: -20px;
+      bottom: -40px;
+      font-size: 13rem;
+      opacity: 0.12;
+      pointer-events: none;
+      line-height: 1;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(8px);
+      padding: 5px 14px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 16px;
+    }
+
+    .hero-title {
+      font-size: 2.3rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+
+    .hero-subtitle {
+      font-size: 1.15rem;
+      opacity: 0.92;
+      font-weight: 400;
+      margin-bottom: 24px;
+      max-width: 700px;
+    }
+
+    .hero-meta {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      font-size: 0.88rem;
+    }
+
+    .hero-meta-item strong {
+      display: block;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      opacity: 0.8;
+      margin-bottom: 2px;
+    }
+
+    /* SECCIONES */
+    section {
+      background: var(--surface);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      padding: 32px;
+      margin-bottom: 30px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 2px solid var(--primary-subtle);
+    }
+
+    .section-num {
+      background: var(--primary);
+      color: white;
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    h2 {
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+    }
+
+    h3 {
+      font-size: 1.18rem;
+      font-weight: 700;
+      margin: 26px 0 12px;
+      color: #1e293b;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    h4 {
+      font-size: 1.02rem;
+      font-weight: 700;
+      margin: 18px 0 8px;
+      color: var(--primary-dark);
+    }
+
+    p {
+      margin-bottom: 14px;
+      color: #334155;
+    }
+
+    /* ALERTAS / CALLOUTS */
+    .callout {
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      margin: 18px 0;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      font-size: 0.94rem;
+    }
+
+    .callout-icon {
+      font-size: 1.4rem;
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .callout-content strong {
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .callout-tip {
+      background: #f0fdf4;
+      border-left: 4px solid var(--primary-light);
+      color: #166534;
+    }
+
+    .callout-note {
+      background: var(--blue-subtle);
+      border-left: 4px solid var(--blue);
+      color: #1e40af;
+    }
+
+    .callout-important {
+      background: #fefce8;
+      border-left: 4px solid var(--accent-warm);
+      color: #854d0e;
+    }
+
+    /* TARJETAS DE MÓDULOS / CARDS */
+    .grid-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+      margin: 20px 0;
+    }
+
+    .feature-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .feature-card:hover {
+      border-color: var(--primary-light);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .feature-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 12px;
+      background: var(--primary-subtle);
+    }
+
+    .feature-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 6px;
+    }
+
+    .feature-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 0;
+    }
+
+    /* PASOS PASO A PASO (STEPS) */
+    .steps-container {
+      margin: 20px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .step-item {
+      display: flex;
+      gap: 16px;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 18px;
+    }
+
+    .step-number {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: white;
+      font-weight: 800;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .step-body {
+      flex: 1;
+    }
+
+    .step-body h5 {
+      font-size: 0.98rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: #1e293b;
+    }
+
+    .step-body p {
+      font-size: 0.9rem;
+      color: #475569;
+      margin-bottom: 0;
+    }
+
+    /* MOCKUP VISUAL DE PANTALLA */
+    .ui-mockup {
+      background: #0f2e1f;
+      color: #e2e8f0;
+      border-radius: var(--radius-md);
+      padding: 22px;
+      margin: 22px 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      overflow-x: auto;
+      border: 1px solid #1f5a38;
+      box-shadow: var(--shadow-md);
+    }
+
+    .ui-mockup-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #1f5a38;
+      padding-bottom: 10px;
+      margin-bottom: 12px;
+      color: #8fcc9e;
+      font-weight: 600;
+    }
+
+    /* TABLAS */
+    .table-container {
+      overflow-x: auto;
+      margin: 18px 0;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+
+    thead th {
+      background: #f1f5f9;
+      color: #334155;
+      font-weight: 700;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    tbody td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      color: #334155;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    tbody tr:hover {
+      background: #f8fafc;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .badge-xp {
+      background: var(--primary-subtle);
+      color: var(--primary-dark);
+    }
+
+    /* PREGUNTAS FRECUENTES (FAQ) */
+    .faq-item {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      margin-bottom: 12px;
+      background: #f8fafc;
+      overflow: hidden;
+    }
+
+    .faq-question {
+      padding: 16px 20px;
+      font-weight: 700;
+      color: var(--primary-dark);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: white;
+    }
+
+    .faq-answer {
+      padding: 14px 20px;
+      font-size: 0.92rem;
+      color: #475569;
+      border-top: 1px solid var(--border);
+      line-height: 1.6;
+    }
+
+    /* PIE DE PÁGINA */
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      border-top: 1px solid var(--border);
+      margin-top: 40px;
+      background: white;
+    }
+
+    /* BOTÓN FLOTANTE VOLVER ARRIBA */
+    .back-to-top {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-lg);
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      z-index: 90;
+    }
+
+    .back-to-top:hover {
+      transform: translateY(-3px);
+      background: var(--primary-dark);
+    }
+
+    /* REGLAS DE IMPRESIÓN (PDF / IMPRESIÓN FÁCIL) */
+    @media print {
+      .top-bar, .sidebar, .back-to-top, .no-print {
+        display: none !important;
+      }
+
+      .app-container {
+        grid-template-columns: 1fr;
+        padding: 0;
+        margin: 0;
+        max-width: 100%;
+      }
+
+      body {
+        background: white;
+        color: black;
+        font-size: 12pt;
+      }
+
+      section {
+        border: none;
+        box-shadow: none;
+        padding: 16px 0;
+        page-break-inside: avoid;
+        border-bottom: 1px solid #ccc;
+      }
+
+      .hero-banner {
+        background: #1b4d31 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        color: white !important;
+      }
+    }
+
+    /* RESPONSIVE MÓVIL */
+    @media (max-width: 900px) {
+      .app-container {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        display: none;
+      }
+
+      .hero-banner {
+        padding: 26px 20px;
+      }
+
+      .hero-title {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BARRA SUPERIOR FIJA -->
+  <header class="top-bar">
+    <a href="#" class="top-bar-brand">
+      <span class="logo-badge">🌿</span>
+      BioCampus
+    </a>
+    <div class="top-bar-actions no-print">
+      <button class="btn btn-primary" onclick="window.print()">
+        🖨️ Imprimir / Guardar PDF
+      </button>
+    </div>
+  </header>
+
+  <!-- CONTENEDOR PRINCIPAL -->
+  <div class="app-container">
+
+    <!-- BARRA LATERAL (ÍNDICE) -->
+    <aside class="sidebar no-print">
+      <div class="sidebar-card">
+        <div class="sidebar-title">Contenido del Manual</div>
+        <ul class="sidebar-menu">
+          <li><a href="#sec-1">1. Introducción</a></li>
+          <li><a href="#sec-2">2. Requisitos e Instalación</a></li>
+          <li><a href="#sec-3">3. Registro e Inicio de Sesión</a></li>
+          <li><a href="#sec-4">4. Pantalla Principal</a></li>
+          <li><a href="#sec-5">5. Módulos de la App</a></li>
+          <li><a href="#sec-5-1" class="sub">• Reciclaje y Croquis</a></li>
+          <li><a href="#sec-5-2" class="sub">• Áreas Verdes</a></li>
+          <li><a href="#sec-5-3" class="sub">• Check-in Bloques</a></li>
+          <li><a href="#sec-5-4" class="sub">• Clima y Sombra</a></li>
+          <li><a href="#sec-5-5" class="sub">• Comunidad y Muro</a></li>
+          <li><a href="#sec-5-6" class="sub">• Ranking y Duelos</a></li>
+          <li><a href="#sec-5-7" class="sub">• Tienda de Puntos</a></li>
+          <li><a href="#sec-5-8" class="sub">• Perfil y Certificados</a></li>
+          <li><a href="#sec-6">6. Ajustes y Temas</a></li>
+          <li><a href="#sec-7">7. Preguntas Frecuentes</a></li>
+          <li><a href="#sec-8">8. Glosario</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- ÁREA DE CONTENIDO -->
+    <main class="content">
+
+      <!-- PORTADA HERO -->
+      <div class="hero-banner">
+        <div class="hero-badge">Manual de Usuario Oficial</div>
+        <h1 class="hero-title">BioCampus</h1>
+        <p class="hero-subtitle">
+          Guía interactiva y sencilla para el uso de la aplicación móvil de sustentabilidad, reciclaje y gamificación ambiental en el campus universitario.
+        </p>
+
+        <div class="hero-meta">
+          <div class="hero-meta-item">
+            <strong>Institución</strong>
+            Universidad Privada Dr. Rafael Belloso Chacín (URBE)
+          </div>
+          <div class="hero-meta-item">
+            <strong>Escuela</strong>
+            Computación / Informática
+          </div>
+          <div class="hero-meta-item">
+            <strong>Autores</strong>
+            D. González, J. Barboza, M. Contreras
+          </div>
+          <div class="hero-meta-item">
+            <strong>Versión</strong>
+            1.0.0 (Android APK)
+          </div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 1: INTRODUCCIÓN -->
+      <section id="sec-1">
+        <div class="section-header">
+          <div class="section-num">1</div>
+          <h2>Introducción: ¿Qué es BioCampus?</h2>
+        </div>
+        <p>
+          ¡Bienvenido a <strong>BioCampus</strong>! Es una aplicación móvil creada especialmente para la comunidad universitaria de la <strong>URBE</strong> (estudiantes, profesores y personal).
+        </p>
+        <p>
+          Su objetivo es motivarte a adoptar hábitos ecológicos dentro de nuestras instalaciones —como reciclar botellas, cuidar jardines y preferir caminerías con sombra— mediante una dinámica divertida parecida a un videojuego: <strong>cada vez que haces una acción sustentable real en la universidad, ganas puntos y experiencia (XP), subes de nivel y desbloqueas avatares y mascotas</strong>.
+        </p>
+
+        <div class="callout callout-tip">
+          <div class="callout-icon">🌱</div>
+          <div class="callout-content">
+            <strong>Alineado al ranking mundial UI GreenMetric</strong>
+            Todas las acciones que registras aportan directamente a los indicadores de sustentabilidad universitaria de URBE en infraestructura, manejo de residuos y cambio climático.
+          </div>
+        </div>
+      </section>
+
+      <!-- SECCIÓN 2: REQUISITOS E INSTALACIÓN -->
+      <section id="sec-2">
+        <div class="section-header">
+          <div class="section-num">2</div>
+          <h2>Requisitos e Instalación en tu Teléfono</h2>
+        </div>
+
+        <h3>Requisitos Mínimos del Dispositivo</h3>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Componente</th>
+                <th>Requisito Mínimo</th>
+                <th>¿Por qué es necesario?</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Sistema Operativo</strong></td>
+                <td>Android 8.0 (Oreo) o superior</td>
+                <td>Compatibilidad con el motor híbrido de la app.</td>
+              </tr>
+              <tr>
+                <td><strong>Cámara</strong></td>
+                <td>Cámara trasera estándar</td>
+                <td>Para el escaneo y reconocimiento visual de bloques.</td>
+              </tr>
+              <tr>
+                <td><strong>Conexión</strong></td>
+                <td>Wi-Fi o Datos Móviles</td>
+                <td>Para sincronizar tus puntos y tabla de líderes en la nube.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Pasos Sencillos para Instalar el APK</h3>
+        <div class="steps-container">
+          <div class="step-item">
+            <div class="step-number">1</div>
+            <div class="step-body">
+              <h5>Descarga el APK Oficial</h5>
+              <p>Entra a la página de descarga de BioCampus desde tu teléfono y toca en el botón <strong>"Descargar APK"</strong>.</p>
+            </div>
+          </div>
+
+          <div class="step-item">
+            <div class="step-number">2</div>
+            <div class="step-body">
+              <h5>Acepta la Descarga Segura</h5>
+              <p>Si Android te advierte <em>"Este archivo puede ser dañino"</em>, pulsa <strong>"Descargar de todos modos"</strong>. (Es el aviso normal de Android cuando una app se instala fuera de Google Play Store).</p>
+            </div>
+          </div>
+
+          <div class="step-item">
+            <div class="step-number">3</div>
+            <div class="step-body">
+              <h5>Habilita Permisos de Instalación e Instala</h5>
+              <p>Abre el archivo descargado. Si el sistema te lo pide, activa la casilla <em>"Permitir desde esta fuente"</em> y luego pulsa <strong>Instalar</strong>. ¡Listo!</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECCIÓN 3: REGISTRO E INICIO DE SESIÓN -->
+      <section id="sec-3">
+        <div class="section-header">
+          <div class="section-num">3</div>
+          <h2>Primeros Pasos: Registro e Inicio de Sesión</h2>
+        </div>
+
+        <p>Al abrir la aplicación por primera vez verás un recorrido ilustrado de bienvenida (<strong>Onboarding</strong>) que te explica la temática de puntos y misiones. Luego llegarás a la pantalla de acceso:</p>
+
+        <div class="grid-cards">
+          <div class="feature-card">
+            <div class="feature-icon">📝</div>
+            <div class="feature-title">Registrarse</div>
+            <p class="feature-desc">
+              Selecciona la pestaña <strong>"Registrarse"</strong>, ingresa tu Nombre Completo, tu Correo (institucional o personal) y una contraseña de al menos 6 caracteres.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">🔑</div>
+            <div class="feature-title">Iniciar Sesión</div>
+            <p class="feature-desc">
+              Si ya tienes cuenta, escribe tu correo y contraseña y pulsa <strong>"Ingresar"</strong> para cargar tu nivel y puntos acumulados.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">📩</div>
+            <div class="feature-title">Recuperar Clave</div>
+            <p class="feature-desc">
+              ¿Olvidaste tu contraseña? Toca el enlace inferior, ingresa tu correo y recibirás un enlace instantáneo para crear una clave nueva.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECCIÓN 4: PANTALLA PRINCIPAL -->
+      <section id="sec-4">
+        <div class="section-header">
+          <div class="section-num">4</div>
+          <h2>Conociendo la Pantalla Principal (Inicio)</h2>
+        </div>
+
+        <p>La pantalla de Inicio es tu panel de control ambiental. Está diseñada para darte retroalimentación visual inmediata:</p>
+
+        <div class="ui-mockup">
+          <div class="ui-mockup-header">
+            <span>🌿 BIOCAMPUS · INICIO</span>
+            <span>NIVEL 4 (65 / 100 XP)</span>
+          </div>
+          <div>🔥 Racha Diaria: 3 días consecutivos</div>
+          <div>🪙 Puntos Canjeables: 850 pts  |  📦 Total Reciclado: 12.4 Kg</div>
+          <div>---------------------------------------------------------------</div>
+          <div>🎁 RECOMPENSA DIARIA: ¡Toca para abrir tu cofre gratuito de hoy!</div>
+          <div>---------------------------------------------------------------</div>
+          <div>🎯 MISIONES ACTIVAS DE HOY:</div>
+          <div>  • ♻️ Maestro del Reciclaje (1/2)</div>
+          <div>  • 🌿 Guardián de Áreas Verdes (0/1)</div>
+          <div>  • 📍 Explorador URBE (2/2) ➜ [RECLAMAR +100 XP] ✅</div>
+        </div>
+
+        <div class="grid-cards">
+          <div class="feature-card">
+            <div class="feature-icon">🔥</div>
+            <div class="feature-title">Racha Diaria (Streak)</div>
+            <p class="feature-desc">Suma días consecutivos entrando a la app y participando. Si dejas pasar un día sin actividad, tu racha volverá a 1.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">🎁</div>
+            <div class="feature-title">Cofre de Regalo</div>
+            <p class="feature-desc">Una vez cada 24 horas puedes abrir tu recompensa diaria para ganar puntos de experiencia gratuitos.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">🎯</div>
+            <div class="feature-title">Misiones Diarias</div>
+            <p class="feature-desc">Objetivos rápidos. Al completarlos, el botón se pondrá verde brillante para reclamar XP adicional.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECCIÓN 5: GUÍA MÓDULO POR MÓDULO -->
+      <section id="sec-5">
+        <div class="section-header">
+          <div class="section-num">5</div>
+          <h2>Guía Módulo por Módulo</h2>
+        </div>
+
+        <!-- 5.1 RECICLAJE -->
+        <div id="sec-5-1">
+          <h3>5.1. Reciclaje y Puntos Limpios (con Croquis Interactivo)</h3>
+          <p>
+            Registra los materiales que depositas en los contenedores de recolección selectiva dentro de URBE.
+          </p>
+
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Material</th>
+                  <th>Ícono</th>
+                  <th>Ejemplos Comunes</th>
+                  <th>Puntos Otorgados</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Plástico (PET)</strong></td>
+                  <td>🧴</td>
+                  <td>Botellas de agua, jugos, tapas plásticas</td>
+                  <td><span class="badge badge-xp">+50 XP</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Papel y Cartón</strong></td>
+                  <td>📄</td>
+                  <td>Hojas de examen, cuadernos viejos, cajas limpias</td>
+                  <td><span class="badge badge-xp">+50 XP</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Vidrio</strong></td>
+                  <td>🫙</td>
+                  <td>Frascos y botellas de vidrio limpias</td>
+                  <td><span class="badge badge-xp">+75 XP</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Orgánico</strong></td>
+                  <td>🍎</td>
+                  <td>Cáscaras de frutas, restos de comida biodegradable</td>
+                  <td><span class="badge badge-xp">+50 XP</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="callout callout-note">
+            <div class="callout-icon">📍</div>
+            <div class="callout-content">
+              <strong>Mapa Interactivo de Puntos Limpios de URBE:</strong>
+              Pulsa el botón <strong>"Ver Mapa de Puntos Limpios"</strong> para abrir el croquis del campus. Podrás localizar los contenedores ubicados en el Edificio Central (cafetería), Biblioteca Central, Bloque G y canchas con sus respectivos tipos de residuos aceptados.
+            </div>
+          </div>
+
+          <div class="callout callout-important">
+            <div class="callout-icon">⚠️</div>
+            <div class="callout-content">
+              <strong>Límite Diario:</strong> Para evitar fraudes, existe un límite de seguridad de <strong>5 registros de reciclaje por día</strong>.
+            </div>
+          </div>
+        </div>
+
+        <hr style="margin: 30px 0; border: none; border-top: 1px solid var(--border);">
+
+        <!-- 5.2 ÁREAS VERDES -->
+        <div id="sec-5-2">
+          <h3>5.2. Cuidado de Áreas Verdes</h3>
+          <p>Reconoce el mantenimiento y conservación de las áreas verdes y jardineras del campus.</p>
+          <div class="steps-container">
+            <div class="step-item">
+              <div class="step-number">💧</div>
+              <div class="step-body">
+                <h5>Regar Plantas (+60 XP)</h5>
+                <p>Regístralo cuando ayudes a hidratar plantas o jardineras en caminerías de la universidad.</p>
+              </div>
+            </div>
+            <div class="step-item">
+              <div class="step-number">🧹</div>
+              <div class="step-body">
+                <h5>Limpiar Zona Verde (+80 XP)</h5>
+                <p>Regístralo tras recolectar basura dispersa en las áreas verdes o bancas del campus.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <hr style="margin: 30px 0; border: none; border-top: 1px solid var(--border);">
+
+        <!-- 5.3 CHECK-IN BLOQUES -->
+        <div id="sec-5-3">
+          <h3>5.3. Check-in y Reconocimiento de Bloques</h3>
+          <p>
+            Gana puntos recorriendo la universidad y demostrando tu presencia en los distintos bloques.
+          </p>
+          <div class="steps-container">
+            <div class="step-item">
+              <div class="step-number">1</div>
+              <div class="step-body">
+                <h5>Toca el botón central de Cámara</h5>
+                <p>En el menú inferior, pulsa el botón destacado de cámara <strong>"Check-in"</strong>.</p>
+              </div>
+            </div>
+            <div class="step-item">
+              <div class="step-number">2</div>
+              <div class="step-body">
+                <h5>Elige tu Ubicación Actual</h5>
+                <p>Selecciona Bloque A, Bloque G, Biblioteca Central, Jardín Central, Cafetería o Canchas.</p>
+              </div>
+            </div>
+            <div class="step-item">
+              <div class="step-number">3</div>
+              <div class="step-body">
+                <h5>Captura la Fotografía</h5>
+                <p>Apunta al edificio o cartel identificativo. El sistema validará la foto y te otorgará los puntos correspondientes.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <hr style="margin: 30px 0; border: none; border-top: 1px solid var(--border);">
+
+        <!-- 5.4 CLIMA Y SOMBRA -->
+        <div id="sec-5-4">
+          <h3>5.4. Clima del Campus y Rutas con Sombra</h3>
+          <p>
+            Especialmente pensado para el clima cálido de Maracaibo, este módulo te cuida de la insolación y los rayos solares intensos:
+          </p>
+          <div class="grid-cards">
+            <div class="feature-card">
+              <div class="feature-icon">☀️</div>
+              <div class="feature-title">Índice UV y Alertas</div>
+              <p class="feature-desc">Te avisa en tiempo real si el nivel de radiación ultravioleta es peligroso para que busques protección e hidratación.</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">🌳</div>
+              <div class="feature-title">Rutas con Sombra</div>
+              <p class="feature-desc">Muestra los senderos peatonales más arbolados y protegidos del sol entre facultades con su porcentaje de cobertura de sombra.</p>
+            </div>
+          </div>
+        </div>
+
+        <hr style="margin: 30px 0; border: none; border-top: 1px solid var(--border);">
+
+        <!-- 5.5 COMUNIDAD -->
+        <div id="sec-5-5">
+          <h3>5.5. Comunidad y Muro Ecológico</h3>
+          <p>Una red social sustentable para que los estudiantes compartan y validen sus buenas prácticas.</p>
+          <div class="steps-container">
+            <div class="step-item">
+              <div class="step-number">➕</div>
+              <div class="step-body">
+                <h5>Publicar tu Acción</h5>
+                <p>Toca el botón <strong>(+)</strong>, escribe qué hiciste (ej. "Limpié los asientos del Bloque G") y adjunta una foto opcional.</p>
+              </div>
+            </div>
+            <div class="step-item">
+              <div class="step-number">✅</div>
+              <div class="step-body">
+                <h5>Validar a tus Compañeros</h5>
+                <p>Pulsa <strong>"Validar Acción"</strong> en los reportes de otros estudiantes. Si la acción es real, ambos ganan XP por verificación comunitaria.</p>
+              </div>
+            </div>
+            <div class="step-item">
+              <div class="step-number">💚</div>
+              <div class="step-body">
+                <h5>Reaccionar</h5>
+                <p>Envía reacciones de Hojita (🍃), Corazón Verde (💚) o Aplausos (👏) a las publicaciones que más te inspiren.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <hr style="margin: 30px 0; border: none; border-top: 1px solid var(--border);">
+
+        <!-- 5.6 RANKING Y DUELOS -->
+        <div id="sec-5-6">
+          <h3>5.6. Tabla de Ranking y Duelos Ecológicos</h3>
+          <p>
+            Compite de forma amistosa con toda la comunidad universitaria:
+          </p>
+          <ul style="padding-left: 20px; margin-bottom: 16px;">
+            <li><strong>Clasificación Semanal y Global:</strong> Observa las posiciones de los estudiantes con mayor puntaje en URBE.</li>
+            <li><strong>Duelos Ecológicos Amistosos (⚔️):</strong> Toca el perfil de cualquier compañero en la tabla y presiona <strong>"Retar a Duelo"</strong> para comparar estadísticas y ver quién ha sido más constante.</li>
+          </ul>
+        </div>
+
+        <hr style="margin: 30px 0; border: none; border-top: 1px solid var(--border);">
+
+        <!-- 5.7 TIENDA -->
+        <div id="sec-5-7">
+          <h3>5.7. Tienda de Recompensas (Eco-Tienda)</h3>
+          <p>
+            Canjea los puntos acumulados por elementos cosméticos para personalizar tu usuario:
+          </p>
+          <div class="grid-cards">
+            <div class="feature-card">
+              <div class="feature-icon">🦊</div>
+              <div class="feature-title">Avatares Únicos</div>
+              <p class="feature-desc">Zorro Guardián, Búho Sabio, Brote Místico, Tortuga Eterna, Panda Sostenible, Dragón Verde, etc.</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">🦋</div>
+              <div class="feature-title">Mascotas Acompañantes</div>
+              <p class="feature-desc">Mariposa, Abeja, Mariquita, Luciérnaga, Rana Verde, Ajolote Real, Fénix Verde y más.</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">👑</div>
+              <div class="feature-title">Títulos de Honor</div>
+              <p class="feature-desc">"Alma Verde", "Guardián Ecológico", "Campeón Verde", "Héroe URBE", "Sabio Sostenible".</p>
+            </div>
+          </div>
+
+          <div class="callout callout-important">
+            <div class="callout-icon">⭐</div>
+            <div class="callout-content">
+              <strong>¡Tranquilo! Comprar no baja tu nivel:</strong>
+              Al comprar en la tienda gastas tus <strong>Puntos</strong>, pero tu <strong>Nivel y tu XP Histórico NUNCA disminuyen</strong>.
+            </div>
+          </div>
+        </div>
+
+        <hr style="margin: 30px 0; border: none; border-top: 1px solid var(--border);">
+
+        <!-- 5.8 PERFIL Y CERTIFICADOS -->
+        <div id="sec-5-8">
+          <h3>5.8. Tu Perfil y Certificados Oficiales en PDF</h3>
+          <p>
+            En la sección de <strong>Perfil</strong> puedes cambiar tu avatar, equipar tu mascota preferida, consultar tus gráficos de impacto ecológico y <strong>descargar un Certificado de Reciclaje en PDF</strong> generado automáticamente con tus estadísticas.
+          </p>
+        </div>
+
+      </section>
+
+      <!-- SECCIÓN 6: AJUSTES Y PERSONALIZACIÓN -->
+      <section id="sec-6">
+        <div class="section-header">
+          <div class="section-num">6</div>
+          <h2>Ajustes y Personalización de la App</h2>
+        </div>
+
+        <p>Toca el ícono de engranaje (⚙️) en la esquina superior derecha para abrir las opciones:</p>
+
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Ajuste</th>
+                <th>Descripción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>☀️ / 🌙 Tema Claro / Oscuro</strong></td>
+                <td>Alterna entre modo día y modo noche para descansar tu vista o ahorrar batería.</td>
+              </tr>
+              <tr>
+                <td><strong>🔤 Tamaño del Texto</strong></td>
+                <td>Permite agrandar o reducir el texto de la app para mayor legibilidad.</td>
+              </tr>
+              <tr>
+                <td><strong>🔔 Recordatorios Diarios</strong></td>
+                <td>Notificación amistosa para que no olvides mantener tu racha ecológica activa.</td>
+              </tr>
+              <tr>
+                <td><strong>🔊 Sonidos y Vibración</strong></td>
+                <td>Activa o silencia los efectos sonoros y hápticos al realizar acciones.</td>
+              </tr>
+              <tr>
+                <td><strong>🔄 Buscar Actualizaciones</strong></td>
+                <td>Comprueba si los desarrolladores han publicado una versión más nueva del APK.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- SECCIÓN 7: PREGUNTAS FRECUENTES (FAQ) -->
+      <section id="sec-7">
+        <div class="section-header">
+          <div class="section-num">7</div>
+          <h2>Preguntas Frecuentes y Solución de Problemas (FAQ)</h2>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>❓ ¿Por qué la cámara no abre al intentar hacer Check-in?</span>
+          </div>
+          <div class="faq-answer">
+            Tu teléfono necesita que autorices el permiso de cámara. Ve a: <em>Ajustes de tu teléfono &gt; Aplicaciones &gt; BioCampus &gt; Permisos &gt; Cámara</em> y selecciona <strong>"Permitir mientras la app está en uso"</strong>. Luego reabre la aplicación.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>❓ ¿Por qué no puedo registrar más de 5 reciclajes hoy?</span>
+          </div>
+          <div class="faq-answer">
+            BioCampus cuenta con un límite preventivo diario de 5 depósitos para garantizar una competencia transparente y justa entre todos los estudiantes. Tu contador se reiniciará automáticamente a las 00:00 (medianoche).
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>❓ ¿Pierdo mi nivel si compro un avatar en la tienda?</span>
+          </div>
+          <div class="faq-answer">
+            ¡No! Tu nivel se calcula con tu experiencia histórica total (XP de por vida), la cual es intocable. Solo se descuentan los puntos acumulados que utilizas para la compra.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>❓ ¿Mis puntos se borran si cambio de teléfono o desinstalo la app?</span>
+          </div>
+          <div class="faq-answer">
+            No. Tu cuenta está respaldada en los servidores en la nube de Supabase. Con solo volver a iniciar sesión con tu correo electrónico y clave en cualquier dispositivo recuperarás todo tu avance, nivel y compras.
+          </div>
+        </div>
+      </section>
+
+      <!-- SECCIÓN 8: GLOSARIO -->
+      <section id="sec-8">
+        <div class="section-header">
+          <div class="section-num">8</div>
+          <h2>Glosario de Términos Clave</h2>
+        </div>
+
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Término</th>
+                <th>Definición Sencilla</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>XP (Experiencia)</strong></td>
+                <td>Puntuación histórica que acumulas con cada acción sustentable; determina tu nivel.</td>
+              </tr>
+              <tr>
+                <td><strong>Puntos Canjeables</strong></td>
+                <td>Moneda virtual de la aplicación que se gasta en la tienda de avatares y mascotas.</td>
+              </tr>
+              <tr>
+                <td><strong>Racha (Streak)</strong></td>
+                <td>Contador de días continuos participando activamente en la aplicación.</td>
+              </tr>
+              <tr>
+                <td><strong>Check-in</strong></td>
+                <td>Validación de tu presencia en un área o bloque del campus universitario.</td>
+              </tr>
+              <tr>
+                <td><strong>Cooldown</strong></td>
+                <td>Tiempo de espera prudencial antes de poder volver a registrar una acción en el mismo sitio.</td>
+              </tr>
+              <tr>
+                <td><strong>UI GreenMetric</strong></td>
+                <td>Ranking global que mide y califica los esfuerzos ecológicos y de sustentabilidad de las universidades.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- PIE DE PÁGINA -->
+      <footer>
+        <p><strong>BioCampus</strong> — Trabajo Especial de Grado © 2026</p>
+        <p>Universidad Privada Dr. Rafael Belloso Chacín (URBE) · Facultad de Ingeniería · Escuela de Computación / Informática</p>
+        <p style="margin-top: 8px; font-size: 0.8rem; color: #94a3b8;">Desarrollado con React, Vite, Capacitor y Supabase.</p>
+      </footer>
+
+    </main>
+
+  </div>
+
+  <!-- BOTÓN VOLVER ARRIBA -->
+  <a href="#" class="back-to-top no-print" title="Volver al inicio">
+    ▲
+  </a>
+
+</body>
+</html>
