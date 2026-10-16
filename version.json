@@ -1,1 +1,1 @@
-﻿{"version":"1.0.17","timestamp":"15/10/2026 20:40:59","downloadUrl":"https://themiguedev.github.io/biocampus-download/BioCampus-Latest.apk","versionCode":2610152040,"forceUpdate":false,"notes":"Solucionado error ReferenceError: useEffect is not defined en modulo de reciclaje"}
+﻿{"version":"1.0.18","timestamp":"15/10/2026 22:25:41","downloadUrl":"https://themiguedev.github.io/biocampus-download/BioCampus-Latest.apk","versionCode":2610152225,"forceUpdate":false,"notes":"Gestos táctiles completos en mapa de reciclaje: zoom por pellizco, doble toque y paneo fluido"}
